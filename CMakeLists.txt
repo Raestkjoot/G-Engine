@@ -5,4 +5,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project(Hello)
 
+add_subdirectory(Dependencies)
+
 add_executable(Hello Main.cpp)
+target_link_libraries(${PROJECT_NAME} PUBLIC Dependencies)
