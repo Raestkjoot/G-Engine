@@ -16,7 +16,7 @@ int main()
     // Seems Wayland has some issues resulting in warnings about GTK and Fontconfig.
     // So, we need to force the use of xWayland
     // Based on: https://discourse.glfw.org/t/glfw-not-using-gtk-through-libdecor/2921/2
-    if (strcmp(getenv("XDG_SESSION_TYPE"), "wayland")) {
+    if (strcmp(getenv("XDG_SESSION_TYPE"), "wayland") == 0) {
         glfwInitHint(GLFW_PLATFORM, GLFW_PLATFORM_X11);
     }
 
