@@ -2,6 +2,7 @@
 #include <GLFW/glfw3.h>
 
 #include <iostream>
+#include <string.h>
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow *window);
@@ -12,8 +13,14 @@ const unsigned int SCR_HEIGHT = 600;
 
 int main()
 {
-    // glfw: initialize and configure
-    // ------------------------------
+    // Seems Wayland has some issues resulting in warnings about GTK and Fontconfig.
+    // So, we need to force the use of xWayland
+    // Based on: https://discourse.glfw.org/t/glfw-not-using-gtk-through-libdecor/2921/2
+    if (strcmp(getenv("XDG_SESSION_TYPE"), "wayland")) {
+        glfwInitHint(GLFW_PLATFORM, GLFW_PLATFORM_X11);
+    }
+
+    // Init and configure glfw
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
