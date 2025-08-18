@@ -3,6 +3,7 @@
 #include "Geometry/VertexArrayObject.h"
 #include "Geometry/VertexBufferObject.h"
 #include "Geometry/VertexAttribute.h"
+#include "Geometry/ElementBufferObject.h"
 
 #include <glad/glad.h>
 #include <iostream>
@@ -74,22 +75,23 @@ int main()
         0, 1, 3,   // first triangle
         1, 2, 3    // second triangle
     };
-    // setup VAO, VBO and EBO
-    VertexArrayObject vao;
+    // setup VBO, EBO and VAO
     VertexBufferObject vbo;
-    unsigned int EBO;
-    glGenBuffers(1, &EBO);
+    ElementBufferObject ebo;
+    VertexArrayObject vao;
 
-    vao.Bind();
     vbo.Bind();
+    vao.Bind();
+    ebo.Bind();
     
     vbo.AllocateData(std::span(vertices, sizeof(vertices) / sizeof(float)));
-
+    ebo.AllocateData(std::span(indices, sizeof(indices) / sizeof(unsigned int)));
     VertexAttribute position(Data::Type::Float, 3);
     vao.SetAttribute(0, position, 0);
-
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW); 
+    
+    VertexArrayObject::Unbind();
+    ElementBufferObject::Unbind();
+    VertexBufferObject::Unbind();
 
     while (!window->ShouldClose()) {
         window->Update();
@@ -101,7 +103,6 @@ int main()
         // _____DRAW TRIANGLE_____
         glUseProgram(shaderProgram);
         vao.Bind();
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     }
 
