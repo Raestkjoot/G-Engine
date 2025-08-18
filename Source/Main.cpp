@@ -1,5 +1,9 @@
 #include "Window.h"
 
+#include "Geometry/VertexArrayObject.h"
+#include "Geometry/VertexBufferObject.h"
+#include "Geometry/VertexAttribute.h"
+
 #include <glad/glad.h>
 #include <iostream>
 
@@ -66,14 +70,16 @@ int main()
         0.0f,  0.5f, 0.0f
     };
     // setup VAO and VBO
-    unsigned int vbo, vao;
-    glGenVertexArrays(1, &vao);
-    glGenBuffers(1, &vbo);
-    glBindVertexArray(vao);
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
+    VertexArrayObject vao;
+    VertexBufferObject vbo;
+
+    vao.Bind();
+    vbo.Bind();
+    
+    vbo.AllocateData(std::span(vertices, sizeof(vertices) / sizeof(float)));
+
+    VertexAttribute position(Data::Type::Float, 3);
+    vao.SetAttribute(0, position, 0);
 
     while (!window->ShouldClose()) {
         window->Update();
@@ -84,12 +90,10 @@ int main()
         
         // _____DRAW TRIANGLE_____
         glUseProgram(shaderProgram);
-        glBindVertexArray(vao);
+        vao.Bind();
         glDrawArrays(GL_TRIANGLES, 0, 3);
     }
 
     // _____CLEANUP_____
-    glDeleteVertexArrays(1, &vao);
-    glDeleteBuffers(1, &vbo);
     glDeleteProgram(shaderProgram);
 }

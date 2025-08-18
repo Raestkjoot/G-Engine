@@ -1,0 +1,29 @@
+#pragma once
+
+#include <glad/glad.h>
+
+class Object {
+public:
+    using Handle = GLuint;
+
+    Object(Handle handle);
+    virtual ~Object();
+    // non-copyable
+    Object(const Object&) = delete;
+    void operator = (const Object&) = delete;
+
+    inline Handle GetHandle() const { return _handle; }
+    inline bool IsValid() const { return _handle != NullHandle; }
+
+    virtual void Bind() const = 0;
+
+protected:
+    // Let derived classes modify the handle if they need to
+    inline Handle& GetHandle() { return _handle; }
+
+    // OpenGL uses 0 to represent null handles
+    static const Handle NullHandle = 0;
+
+private:
+    Handle _handle;
+};
