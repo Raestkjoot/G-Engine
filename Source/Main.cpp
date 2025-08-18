@@ -65,13 +65,20 @@ int main()
 
     // _____SETUP VERTICES_____
     float vertices[] = {
-        -0.5f, -0.5f, 0.0f,
-        0.5f, -0.5f, 0.0f,
-        0.0f,  0.5f, 0.0f
+        0.5f,  0.5f, 0.0f,  // top right
+        0.5f, -0.5f, 0.0f,  // bottom right
+        -0.5f, -0.5f, 0.0f,  // bottom left
+        -0.5f,  0.5f, 0.0f   // top left 
     };
-    // setup VAO and VBO
+    unsigned int indices[] = { 
+        0, 1, 3,   // first triangle
+        1, 2, 3    // second triangle
+    };
+    // setup VAO, VBO and EBO
     VertexArrayObject vao;
     VertexBufferObject vbo;
+    unsigned int EBO;
+    glGenBuffers(1, &EBO);
 
     vao.Bind();
     vbo.Bind();
@@ -80,6 +87,9 @@ int main()
 
     VertexAttribute position(Data::Type::Float, 3);
     vao.SetAttribute(0, position, 0);
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW); 
 
     while (!window->ShouldClose()) {
         window->Update();
@@ -91,7 +101,8 @@ int main()
         // _____DRAW TRIANGLE_____
         glUseProgram(shaderProgram);
         vao.Bind();
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     }
 
     // _____CLEANUP_____
