@@ -7,15 +7,13 @@
 #include <sstream>
 
 Shader::Shader(Type type) : Object(NullHandle) {
-    Handle& handle = GetHandleRef();
-    handle = glCreateShader(type);
+    _handle = glCreateShader(type);
 }
 
 Shader::~Shader() {
     if (IsValid()) {
-        Handle& handle = GetHandleRef();
-        glDeleteShader(handle);
-        handle = NullHandle;
+        glDeleteShader(_handle);
+        _handle = NullHandle;
     }
 }
 

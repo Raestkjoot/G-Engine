@@ -21,12 +21,8 @@ public:
     virtual void Bind() const = 0;
 
 protected:
-    // Let derived classes modify the handle if they need to
-    inline Handle& GetHandleRef() { return _handle; }
-
     // OpenGL uses 0 to represent null handles
     static const Handle NullHandle = 0;
 
-private:
     Handle _handle;
 };
