@@ -1,11 +1,11 @@
 #include "BufferObject.h"
 
 BufferObject::BufferObject() : Object(NullHandle) {
-    glGenBuffers(1, &GetHandle());
+    glGenBuffers(1, &GetHandleRef());
 }
 
 BufferObject::~BufferObject() {
-    glDeleteBuffers(1, &GetHandle());
+    glDeleteBuffers(1, &GetHandleRef());
 }
 
 void BufferObject::Bind(Target target) const {

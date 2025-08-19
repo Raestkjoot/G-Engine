@@ -1,11 +1,11 @@
 #include "VertexArrayObject.h"
 
 VertexArrayObject::VertexArrayObject() : Object(NullHandle) {
-    glGenVertexArrays(1, &GetHandle());
+    glGenVertexArrays(1, &GetHandleRef());
 }
 
 VertexArrayObject::~VertexArrayObject() {
-    glDeleteVertexArrays(1, &GetHandle());
+    glDeleteVertexArrays(1, &GetHandleRef());
 }
 
 void VertexArrayObject::Bind() const {

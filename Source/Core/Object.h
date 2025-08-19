@@ -11,6 +11,9 @@ public:
     // non-copyable
     Object(const Object&) = delete;
     void operator = (const Object&) = delete;
+    // move semantics
+    Object(Object&& object) noexcept;
+    Object& operator = (Object&& object) noexcept;
 
     inline Handle GetHandle() const { return _handle; }
     inline bool IsValid() const { return _handle != NullHandle; }
@@ -19,7 +22,7 @@ public:
 
 protected:
     // Let derived classes modify the handle if they need to
-    inline Handle& GetHandle() { return _handle; }
+    inline Handle& GetHandleRef() { return _handle; }
 
     // OpenGL uses 0 to represent null handles
     static const Handle NullHandle = 0;

@@ -11,3 +11,8 @@ add_subdirectory(Dependencies)
 add_executable(Hello "Source/Main.cpp" ${Source})
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Source)
 target_link_libraries(${PROJECT_NAME} PUBLIC Dependencies)
+
+# Copy assets to output path
+file(COPY Assets DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Debug)
+file(COPY Assets DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Release)
+file(COPY Assets DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
