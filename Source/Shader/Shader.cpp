@@ -58,15 +58,6 @@ Shader Shader::Load(Shader::Type type, const char* shaderPath) {
         std::cout << "ERROR::SHADER::COMPILATION_FAILED" << type << std::endl;
 	}
 
-	// _id = glCreateProgram();
-	// glAttachShader(_id, shader.GetHandle());
-	// glLinkProgram(_id);
-	// glGetProgramiv(_id, GL_LINK_STATUS, &success);
-	// if (!success) {
-	// 	glGetProgramInfoLog(_id, 512, NULL, infoLog);
-	// 	Logger::PrintError("ERROR::SHADER::PROGRAM::LINKING_FAILED\n   {}", infoLog);
-	// }
-
     return shader;
 }
 
