@@ -5,6 +5,7 @@
 #include "Geometry/VertexAttribute.h"
 #include "Geometry/ElementBufferObject.h"
 #include "Shader/Shader.h"
+#include "Shader/ShaderProgram.h"
 
 #include <glad/glad.h>
 #include <iostream>
@@ -13,55 +14,46 @@ int main()
 {
     Window* window = new Window(800, 600, "Hello Window");
 
-    // _____SETUP SHADERS_____
-    unsigned int shaderProgram;
-    {
-        // Compile vertex shader
-        Shader vertShader = Shader::Load(Shader::Type::VertexShader, "Assets/Default.vert");
-        Shader fragShader = Shader::Load(Shader::Type::FragmentShader, "Assets/Default.frag");
-        // Link shaders
-        shaderProgram = glCreateProgram();
-        glAttachShader(shaderProgram, vertShader.GetHandle());
-        glAttachShader(shaderProgram, fragShader.GetHandle());
-        glLinkProgram(shaderProgram);
-        int  success;
-        char infoLog[512];
-        glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
-        if (!success) {
-            glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
-            std::cout << "ERROR::SHADER_PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
-        }
-    }
-
-    // _____SETUP VERTICES_____
-    float vertices[] = {
-        0.5f,  0.5f, 0.0f,  // top right
-        0.5f, -0.5f, 0.0f,  // bottom right
-        -0.5f, -0.5f, 0.0f,  // bottom left
-        -0.5f,  0.5f, 0.0f   // top left 
-    };
-    unsigned int indices[] = { 
-        0, 1, 3,   // first triangle
-        1, 2, 3    // second triangle
-    };
-    // setup VBO, EBO and VAO
-    VertexBufferObject vbo;
-    ElementBufferObject ebo;
+    ShaderProgram shaderProgram;
     VertexArrayObject vao;
 
-    vbo.Bind();
-    vao.Bind();
-    ebo.Bind();
-    
-    vbo.AllocateData(std::span(vertices, sizeof(vertices) / sizeof(float)));
-    ebo.AllocateData(std::span(indices, sizeof(indices) / sizeof(unsigned int)));
-    VertexAttribute position(Data::Type::Float, 3);
-    vao.SetAttribute(0, position, 0);
-    
-    VertexArrayObject::Unbind();
-    ElementBufferObject::Unbind();
-    VertexBufferObject::Unbind();
 
+    { // SETUP
+        // Shaders
+        Shader vertShader = Shader::Load(Shader::Type::VertexShader, "Assets/Default.vert");
+        Shader fragShader = Shader::Load(Shader::Type::FragmentShader, "Assets/Default.frag");
+        shaderProgram.Build(vertShader, fragShader);
+
+        // Vertices
+        float vertices[] = {
+            0.5f,  0.5f, 0.0f,  // top right
+            0.5f, -0.5f, 0.0f,  // bottom right
+            -0.5f, -0.5f, 0.0f,  // bottom left
+            -0.5f,  0.5f, 0.0f   // top left 
+        };
+        unsigned int indices[] = { 
+            0, 1, 3,   // first triangle
+            1, 2, 3    // second triangle
+        };
+        // setup VBO, EBO and VAO
+        VertexBufferObject vbo;
+        ElementBufferObject ebo;
+
+        vbo.Bind();
+        vao.Bind();
+        ebo.Bind();
+        
+        vbo.AllocateData(std::span(vertices, sizeof(vertices) / sizeof(float)));
+        ebo.AllocateData(std::span(indices, sizeof(indices) / sizeof(unsigned int)));
+        VertexAttribute position(Data::Type::Float, 3);
+        vao.SetAttribute(0, position, 0);
+        
+        VertexArrayObject::Unbind();
+        ElementBufferObject::Unbind();
+        VertexBufferObject::Unbind();
+    }
+
+    // Render loop
     while (!window->ShouldClose()) {
         window->Update();
 
@@ -70,11 +62,11 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT);
         
         // _____DRAW TRIANGLE_____
-        glUseProgram(shaderProgram);
+        glUseProgram(shaderProgram.GetHandle());
         vao.Bind();
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     }
 
     // _____CLEANUP_____
-    glDeleteProgram(shaderProgram);
+    glDeleteProgram(shaderProgram.GetHandle());
 }
