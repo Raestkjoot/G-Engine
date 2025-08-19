@@ -14,11 +14,10 @@ int main()
 {
     Window* window = new Window(800, 600, "Hello Window");
 
+    // _____SETUP_____
     ShaderProgram shaderProgram;
     VertexArrayObject vao;
-
-
-    { // SETUP
+    {
         // Shaders
         Shader vertShader = Shader::Load(Shader::Type::VertexShader, "Assets/Default.vert");
         Shader fragShader = Shader::Load(Shader::Type::FragmentShader, "Assets/Default.frag");
@@ -53,20 +52,17 @@ int main()
         VertexBufferObject::Unbind();
     }
 
-    // Render loop
+    //_____RENDER LOOP_____
     while (!window->ShouldClose()) {
         window->Update();
 
-        // _____DRAW BACKGROUND______
+        // Draw background
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
         
-        // _____DRAW TRIANGLE_____
+        // Draw triangle
         glUseProgram(shaderProgram.GetHandle());
         vao.Bind();
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     }
-
-    // _____CLEANUP_____
-    glDeleteProgram(shaderProgram.GetHandle());
 }
