@@ -16,29 +16,25 @@ class ShaderProgram : public Object {
     void Bind() const override;
 
     // Build (Attach and link) a shader program with vertex and fragment shaders
-    inline bool Build(const Shader& vertexShader, const Shader& fragmentShader)
-    {
+    inline bool Build(const Shader& vertexShader, const Shader& fragmentShader) {
         return Build(vertexShader, fragmentShader, nullptr, nullptr, nullptr);
     }
 
     // Build (Attach and link) a shader program with vertex and fragment shaders + geometry shader
-    inline bool Build(const Shader& vertexShader, const Shader& fragmentShader, const Shader& geometryShader)
-    {
+    inline bool Build(const Shader& vertexShader, const Shader& fragmentShader, const Shader& geometryShader) {
         return Build(vertexShader, fragmentShader, nullptr, nullptr, &geometryShader);
     }
 
     // Build (Attach and link) a shader program with vertex and fragment shaders + tesselation shaders
     inline bool Build(const Shader& vertexShader, const Shader& fragmentShader,
-        const Shader* tesselationControlShader, const Shader& tesselationEvaluationShader)
-    {
+        const Shader* tesselationControlShader, const Shader& tesselationEvaluationShader) {
         return Build(vertexShader, fragmentShader, tesselationControlShader, &tesselationEvaluationShader, nullptr);
     }
 
     // Build (Attach and link) a shader program with vertex and fragment shaders + tesselation shaders + geometry shader
     inline bool Build(const Shader& vertexShader, const Shader& fragmentShader,
         const Shader* tesselationControlShader, const Shader& tesselationEvaluationShader,
-        const Shader& geometryShader)
-    {
+        const Shader& geometryShader) {
         return Build(vertexShader, fragmentShader, tesselationControlShader, &tesselationEvaluationShader, &geometryShader);
     }
 
