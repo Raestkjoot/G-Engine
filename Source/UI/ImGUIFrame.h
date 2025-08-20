@@ -2,10 +2,10 @@
 
 class Window;
 
-class UIRenderer {
+class ImGUIFrame {
 public:
-    UIRenderer();
-    ~UIRenderer();
+    ImGUIFrame();
+    ~ImGUIFrame();
 
     void Initialize(::Window& window);
     void Cleanup();

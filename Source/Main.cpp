@@ -6,7 +6,9 @@
 #include "Geometry/ElementBufferObject.h"
 #include "Shader/Shader.h"
 #include "Shader/ShaderProgram.h"
-#include "Utils/UIRenderer.h"
+#include "UI/ImGUIFrame.h"
+#include "Gameplay/Scene.h"
+#include "Gameplay/GameObject.h"
 
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
@@ -57,16 +59,46 @@ int main()
     }
 
     // Setup Dear ImGui context
-    UIRenderer uiRenderer;
-    uiRenderer.Initialize(*window);
+    ImGUIFrame imGUIFrame;
+    imGUIFrame.Initialize(*window);
 
-    //_____RENDER LOOP_____
+    // Setup game
+    Scene scene;
+
+    //_____LOOP_____
     while (!window->ShouldClose()) {
         window->Update();
 
         // ImGUI new frame
-        uiRenderer.BeginFrame();
-        ImGui::ShowDemoWindow(); // Show demo window! :)
+        imGUIFrame.BeginFrame();
+        // Menu bar
+        ImGui::BeginMainMenuBar();
+        if (ImGui::BeginMenu("File")) {
+            ImGui::EndMenu();
+        }
+        if (ImGui::BeginMenu("GameObject")) {
+            if (ImGui::MenuItem("Create New GameObject")) {
+                scene.CreateGameObject();
+            }
+            ImGui::EndMenu();
+        }
+        ImGui::EndMainMenuBar();
+        // Hierarchy
+        ImGui::Begin("Hierarchy");
+        static int selected = -1;
+        auto gameObjects = scene.GetAllGameObjects();
+        for (int i = 0; i < gameObjects.size(); ++i) {
+            //ImGui::Text(gameObjects[i].Name.c_str());
+            ImGui::PushID(i);
+            if (ImGui::Selectable(gameObjects[i].Name.c_str(), selected == i)) {
+                selected = i;
+            }
+            ImGui::PopID();
+        // if (ImGui::TreeNode("Tree Nodes")) {
+        }
+        ImGui::End();
+
+        ImGui::ShowDemoWindow();
 
         // Draw background
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -78,9 +110,9 @@ int main()
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
         // Draw ImGUI
-        uiRenderer.EndFrame();
+        imGUIFrame.EndFrame();
     }
 
     // Cleanup
-    uiRenderer.Cleanup();
+    imGUIFrame.Cleanup();
 }
