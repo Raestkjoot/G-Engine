@@ -9,9 +9,7 @@ class Scene {
 public:
     GameObject* CreateGameObject(const std::string& name = "NewGameObject");
 
-    std::vector<GameObject> GetAllGameObjects() const {
-        return _gameObjects;
-    }
+    std::vector<GameObject> GetAllGameObjects() const;
 
 private:
     std::vector<GameObject> _gameObjects;
