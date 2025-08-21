@@ -3,5 +3,5 @@
 #include <iostream>
 
 GameObject::GameObject(const std::string& name) {
-    Name = name;
+    name = name;
 }

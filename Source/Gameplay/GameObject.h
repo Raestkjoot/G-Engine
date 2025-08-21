@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Transform.h"
+
 #include <string>
 
 class GameObject
@@ -7,5 +9,6 @@ class GameObject
 public:
     GameObject(const std::string& name);
 
-    std::string Name;
+    std::string name;
+    Transform transform;
 };

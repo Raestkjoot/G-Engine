@@ -13,7 +13,7 @@ void Hierarchy::Update() {
     for (int i = 0; i < gameObjects.size(); ++i) {
         //ImGui::Text(gameObjects[i].Name.c_str());
         ImGui::PushID(i);
-        if (ImGui::Selectable(gameObjects[i].Name.c_str(), selected == i)) {
+        if (ImGui::Selectable(gameObjects[i].name.c_str(), selected == i)) {
             selected = i;
         }
         ImGui::PopID();
