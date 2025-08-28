@@ -8,12 +8,9 @@ public:
 
     Object(Handle handle);
     virtual ~Object();
-    // non-copyable
-    Object(const Object&) = delete;
-    void operator = (const Object&) = delete;
     // move semantics
-    Object(Object&& object) noexcept;
-    Object& operator = (Object&& object) noexcept;
+    // Object(Object&& object) noexcept;
+    // Object& operator = (Object&& object) noexcept;
 
     inline Handle GetHandle() const { return _handle; }
     inline bool IsValid() const { return _handle != NullHandle; }

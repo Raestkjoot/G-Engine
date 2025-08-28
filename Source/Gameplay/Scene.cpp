@@ -2,8 +2,15 @@
 
 #include "Gameplay/GameObject.h"
 
-GameObject* Scene::CreateGameObject(const std::string& name) {
-    return &_gameObjects.emplace_back(name);
+void Scene::Draw() {
+    for (auto& go : _gameObjects) {
+        go.sprite.Draw();
+    }
+}
+
+void Scene::CreateGameObject(const std::string &name)
+{
+    _gameObjects.emplace_back(name);
 }
 
 std::vector<GameObject>& Scene::GetAllGameObjects() {

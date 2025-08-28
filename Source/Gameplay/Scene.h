@@ -1,13 +1,20 @@
 #pragma once
 
+#include "GameObject.h"
+
 #include <vector>
 #include <string>
 
-class GameObject;
-
 class Scene {
 public:
-    GameObject* CreateGameObject(const std::string& name = "NewGameObject");
+    Scene() {}
+    // non-copyable
+    Scene(const Scene&) = delete;
+    void operator = (const Scene&) = delete;
+
+    void Draw();
+
+    void CreateGameObject(const std::string& name = "NewGameObject");
 
     std::vector<GameObject>& GetAllGameObjects();
 
