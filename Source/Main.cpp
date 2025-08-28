@@ -10,14 +10,16 @@
 #include "Gameplay/GameObject.h"
 
 #include "UI/ImGUIFrame.h"
-#include "UI/UIElement.h"
-#include "UI/MenuBar.h"
-#include "UI/Hierarchy.h"
+#include "UI/SceneUI.h"
+#include "UI/SceneUI_MenuBar.h"
+#include "UI/SceneUI_Hierarchy.h"
+#include "UI/SceneUI_Inspector.h"
 
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
 #include <glad/glad.h>
+
 #include <iostream>
 
 int main()
@@ -69,10 +71,10 @@ int main()
     // Setup game
     Scene scene;
     // Setup Engine UI
-    MenuBar menuBar;
-    menuBar.SetCurScene(&scene);
-    Hierarchy hierarchy;
-    hierarchy.SetCurScene(&scene);
+    SceneUI_MenuBar menuBar(&scene);
+    SceneUI_Hierarchy hierarchy(&scene);
+    SceneUI_Inspector inspector(&scene, &hierarchy);
+
 
     //_____LOOP_____
     while (!window->ShouldClose()) {
@@ -82,6 +84,8 @@ int main()
         imGUIFrame.BeginFrame();
         menuBar.Update();
         hierarchy.Update();
+        inspector.Update();
+
         // ImGui::ShowDemoWindow();
 
         // Draw background

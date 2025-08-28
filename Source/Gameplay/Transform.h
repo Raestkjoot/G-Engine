@@ -21,6 +21,8 @@ public:
 
     bool IsDirty() const;
 
+    glm::vec3 position {0.0f, 0.0f, 0.0f};
+
 private:
     glm::vec3 _translation {0.0f, 0.0f, 0.0f};
     glm::vec3 _rotation {0.0f, 0.0f, 0.0f};

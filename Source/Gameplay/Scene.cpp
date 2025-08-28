@@ -6,6 +6,6 @@ GameObject* Scene::CreateGameObject(const std::string& name) {
     return &_gameObjects.emplace_back(name);
 }
 
-std::vector<GameObject> Scene::GetAllGameObjects() const {
+std::vector<GameObject>& Scene::GetAllGameObjects() {
     return _gameObjects;
 }

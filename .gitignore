@@ -2,6 +2,7 @@
 [bB]in/
 [bB]uild/
 .vs/
+.vscode/
 .idea/
 
 CMakeLists.txt.user

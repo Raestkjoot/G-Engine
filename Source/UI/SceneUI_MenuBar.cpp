@@ -1,10 +1,10 @@
-#include "MenuBar.h"
+#include "SceneUI_MenuBar.h"
 
 #include "Gameplay/Scene.h"
 
 #include <imgui.h>
 
-void MenuBar::Update() {
+void SceneUI_MenuBar::Update() {
     ImGui::BeginMainMenuBar();
     if (ImGui::BeginMenu("File")) {
         ImGui::EndMenu();
@@ -16,8 +16,4 @@ void MenuBar::Update() {
         ImGui::EndMenu();
     }
     ImGui::EndMainMenuBar();
-}
-
-void MenuBar::SetCurScene(Scene* scene) {
-    _scene = scene;
 }
