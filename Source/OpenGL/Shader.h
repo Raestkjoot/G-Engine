@@ -1,12 +1,8 @@
 #pragma once
 
-#include "Core/Object.h"
+#include "Object.h"
 
-#include <span>
-
-// Shader is an OpenGL Object that represents a program that runs on the GPU
-// There are different types, with different requirements. See Lecture 2: Shaders for more information
-class Shader : public Object {
+class Shader {
 public:
     enum Type : GLenum
     {
@@ -19,17 +15,15 @@ public:
     };
 
     virtual ~Shader();
-    Shader(Shader&& shader) noexcept;
-    Shader& operator = (Shader&& shader) noexcept;
-    
+
     static Shader Load(Shader::Type type, const char* shaderPath);
 
+    inline Object::Handle GetHandle() const { return _handle; }
     Type GetType() const;
     inline bool IsType(Type type) const { return GetType() == type; }
+    inline bool IsValid() const { return _handle != 0; }
 
 private:
     Shader(Type type);
-
-    // Implements the Bind required by Object. Shaders and shader programs don't use Bind()
-    void Bind() const override;
+    Object::Handle _handle;
 };

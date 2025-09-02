@@ -1,19 +1,15 @@
 #pragma once
 
-#include "Core/Object.h"
+#include "Object.h"
 
 class Shader;
 
 class ShaderProgram : public Object {
-    public:
-    // Declare the type used for uniform locations
-    using Location = GLint;
-
+public:
     ShaderProgram();
     virtual ~ShaderProgram();
 
-    // Implements the Bind required by Object. Shaders and shader programs don't use Bind()
-    void Bind() const override;
+    virtual void Bind() override;
 
     // Build (Attach and link) a shader program with vertex and fragment shaders
     inline bool Build(const Shader& vertexShader, const Shader& fragmentShader) {

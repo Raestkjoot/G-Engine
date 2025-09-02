@@ -1,5 +1,7 @@
 #include "Sprite.h"
 
+#include <vector>
+
 Sprite::Sprite() {
     // Shader
     Shader vertShader = Shader::Load(Shader::Type::VertexShader, "Assets/Default.vert");
@@ -7,13 +9,13 @@ Sprite::Sprite() {
     _shaderProgram.Build(vertShader, fragShader);
 
     // Vertices
-    float vertices[] = {
+    std::vector<float> vertices = {
         0.5f,  0.5f, 0.0f,  // top right
         0.5f, -0.5f, 0.0f,  // bottom right
         -0.5f, -0.5f, 0.0f,  // bottom left
         -0.5f,  0.5f, 0.0f   // top left 
     };
-    unsigned int indices[] = { 
+    std::vector<unsigned int> indices = { 
         0, 1, 3,   // first triangle
         1, 2, 3    // second triangle
     };
@@ -24,11 +26,10 @@ Sprite::Sprite() {
     vbo.Bind();
     _vao.Bind();
     ebo.Bind();
-    
-    vbo.AllocateData(std::span(vertices, sizeof(vertices) / sizeof(float)));
-    ebo.AllocateData(std::span(indices, sizeof(indices) / sizeof(unsigned int)));
-    VertexAttribute position(Data::Type::Float, 3);
-    _vao.SetAttribute(0, position, 0);
+
+    vbo.AllocateData(vertices);
+    ebo.AllocateData(indices);
+    _vao.SetAttribute(VertexArrayObject::Type::Float, 3, 0, 0);
     
     VertexArrayObject::Unbind();
     ElementBufferObject::Unbind();
@@ -36,7 +37,8 @@ Sprite::Sprite() {
 }
 
 void Sprite::Draw() {
-        glUseProgram(_shaderProgram.GetHandle());
-        _vao.Bind();
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    // TODO: lower level of abstraction compared to the rest. These gl functions should probably be abstracted away.
+    glUseProgram(_shaderProgram.GetHandle());
+    _vao.Bind();
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }

@@ -1,10 +1,10 @@
 #include "ShaderProgram.h"
 
-#include "Shader/Shader.h"
+#include "Shader.h"
 
 #include <cassert>
 
-ShaderProgram::ShaderProgram() : Object(NullHandle) {
+ShaderProgram::ShaderProgram() {
     _handle = glCreateProgram();
 }
 
@@ -15,9 +15,8 @@ ShaderProgram::~ShaderProgram() {
     }
 }
 
-void ShaderProgram::Bind() const {
-    // Bind should not be called for ShaderProgram. Assert if it gets called
-    assert(false);
+void ShaderProgram::Bind() {
+    glUseProgram(_handle);
 }
 
 bool ShaderProgram::IsLinked() const {
