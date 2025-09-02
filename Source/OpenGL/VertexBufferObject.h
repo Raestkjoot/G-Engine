@@ -2,19 +2,12 @@
 
 // https://www.khronos.org/opengl/wiki/Vertex_Specification#Vertex_Buffer_Object
 
-#include "Object.h"
+#include "BufferObject.h"
 
 #include <vector>
 
-class VertexBufferObject : public Object {
+class VertexBufferObject : public BufferObject {
 public:
-    enum Usage : GLenum
-    {
-        StaticDraw = GL_STATIC_DRAW,    StaticRead = GL_STATIC_READ,    StaticCopy = GL_STATIC_COPY,
-        DynamicDraw = GL_DYNAMIC_DRAW,  DynamicRead = GL_DYNAMIC_READ,  DynamicCopy = GL_DYNAMIC_COPY,
-        StreamDraw = GL_STREAM_DRAW,    StreamRead = GL_STREAM_READ,    StreamCopy = GL_STREAM_COPY
-    };
-
     VertexBufferObject();
     virtual ~VertexBufferObject();
 
