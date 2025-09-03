@@ -2,8 +2,11 @@
 
 #include "Gameplay/GameObject.h"
 
+#include <iostream>
+
 void Scene::Draw() {
     for (auto& go : _gameObjects) {
+        go.sprite->GetShaderProgram()->SetUniform("position", go.transform->position);
         go.sprite->Draw();
     }
 }

@@ -16,8 +16,7 @@
 
 #include <iostream>
 
-int main()
-{
+int main() {
     Window* window = new Window(800, 600, "Hello Window");
 
     // Setup Dear ImGui context

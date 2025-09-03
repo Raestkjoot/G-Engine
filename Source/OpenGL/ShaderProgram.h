@@ -2,6 +2,10 @@
 
 #include "Object.h"
 
+#include <glm/glm.hpp>
+
+#include <string>
+
 class Shader;
 
 class ShaderProgram : public Object {
@@ -36,6 +40,9 @@ public:
 
     // Check if shaders have been linked to create a valid program
     bool IsLinked() const;
+
+    // TODO: Maybe a template version? template<typename T> void SetUniform(const std::string& name, T value) 
+    void SetUniform(const std::string& name, glm::vec3 value);
 
 private:
     // Build (Attach and link) all shaders provided for the rasterization pipeline

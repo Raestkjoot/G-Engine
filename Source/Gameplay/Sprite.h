@@ -12,6 +12,8 @@ public:
 
      void Draw();
 
+     ShaderProgram* GetShaderProgram() { return &_shaderProgram; }
+
 private:
     ShaderProgram _shaderProgram;
     VertexArrayObject _vao;

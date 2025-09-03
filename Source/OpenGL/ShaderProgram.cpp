@@ -69,3 +69,8 @@ bool ShaderProgram::Link() {
     glLinkProgram(GetHandle());
     return IsLinked();
 }
+
+void ShaderProgram::SetUniform(const std::string& name, glm::vec3 value) {
+    GLint location = glGetUniformLocation(GetHandle(), name.c_str());
+    glUniform3fv(location, 1, &value[0]);
+}
