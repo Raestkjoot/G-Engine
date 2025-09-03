@@ -15,7 +15,7 @@ void SceneUI_Inspector::Update() {
             auto& gameObject = _scene->GetAllGameObjects()[_hierarchy->GetCurSelected()];
 
             ImGui::InputText("Name", &gameObject.name);
-            ImGui::DragFloat3("Position", &gameObject.transform.position[0], 0.1f);
+            ImGui::DragFloat3("Position", &gameObject.transform->position[0], 0.1f);
         }
 
         ImGui::End();

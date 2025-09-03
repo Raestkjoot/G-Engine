@@ -5,12 +5,15 @@
 
 #include <string>
 
-class GameObject
-{
+class GameObject {
 public:
     GameObject(const std::string& name);
+    GameObject(GameObject&& other);
+    // non-copyable
+    GameObject(const GameObject&) = delete;
+    void operator = (const GameObject&) = delete;
 
     std::string name;
-    Transform transform;
-    Sprite sprite;
+    Transform* transform;
+    Sprite* sprite;
 };

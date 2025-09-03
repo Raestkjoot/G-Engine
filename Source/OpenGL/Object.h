@@ -3,6 +3,8 @@
 // https://www.khronos.org/opengl/wiki/OpenGL_Object
 // https://www.khronos.org/opengl/wiki/GLSL_Object
 
+// TODO: We might want to delete copy-constructors for these types of objects
+
 #include <glad/glad.h>
 
 class Object {

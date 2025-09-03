@@ -4,12 +4,11 @@
 
 void Scene::Draw() {
     for (auto& go : _gameObjects) {
-        go.sprite.Draw();
+        go.sprite->Draw();
     }
 }
 
-void Scene::CreateGameObject(const std::string &name)
-{
+void Scene::CreateGameObject(const std::string &name) {
     _gameObjects.emplace_back(name);
 }
 
