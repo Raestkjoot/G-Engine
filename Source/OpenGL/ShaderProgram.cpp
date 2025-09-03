@@ -70,7 +70,60 @@ bool ShaderProgram::Link() {
     return IsLinked();
 }
 
-void ShaderProgram::SetUniform(const std::string& name, glm::vec3 value) {
-    GLint location = glGetUniformLocation(GetHandle(), name.c_str());
+int ShaderProgram::GetUniformLocation(const std::string& name) {
+    return glGetUniformLocation(GetHandle(), name.c_str());
+}
+
+#pragma region setting uniforms
+
+// float
+void ShaderProgram::SetUniform(int location, float value) {
+    glUniform1f(location, value);
+}
+
+void ShaderProgram::SetUniform(int location, glm::vec2 value) {
+    glUniform2fv(location, 1, &value[0]);
+}
+
+void ShaderProgram::SetUniform(int location, glm::vec3 value) {
     glUniform3fv(location, 1, &value[0]);
 }
+// integer
+void ShaderProgram::SetUniform(int location, int value) {
+    glUniform1i(location, value);
+}
+
+void ShaderProgram::SetUniform(int location, glm::ivec2 value) {
+    glUniform2iv(location, 1, &value[0]);
+}
+
+void ShaderProgram::SetUniform(int location, glm::ivec3 value) {
+    glUniform3iv(location, 1, &value[0]);
+}
+
+// unsigned int
+void ShaderProgram::SetUniform(int location, unsigned int value) {
+    glUniform1ui(location, value);
+}
+
+void ShaderProgram::SetUniform(int location, glm::uvec2 value) {
+    glUniform2uiv(location, 1, &value[0]);
+}
+
+void ShaderProgram::SetUniform(int location, glm::uvec3 value) {
+    glUniform3uiv(location, 1, &value[0]);
+}
+
+// matrix
+void ShaderProgram::SetUniform(int location, glm::mat2x2 value) {
+    glUniformMatrix2fv(location, 1, false, &value[0][0]);
+}
+
+void ShaderProgram::SetUniform(int location, glm::mat3x3 value) {
+    glUniformMatrix3fv(location, 1, false, &value[0][0]);
+}
+
+void ShaderProgram::SetUniform(int location, glm::mat4x4 value) {
+    glUniformMatrix4fv(location, 1, false, &value[0][0]);
+}
+#pragma endregion

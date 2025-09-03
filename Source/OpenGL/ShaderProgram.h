@@ -41,8 +41,30 @@ public:
     // Check if shaders have been linked to create a valid program
     bool IsLinked() const;
 
-    // TODO: Maybe a template version? template<typename T> void SetUniform(const std::string& name, T value) 
-    void SetUniform(const std::string& name, glm::vec3 value);
+    int GetUniformLocation(const std::string& name);
+
+    template<typename T>
+    void SetUniform(const std::string& name, T value) {
+        SetUniform(GetUniformLocation(name), value);
+    }
+
+    // https://registry.khronos.org/OpenGL-Refpages/gl4/html/glUniform.xhtml
+    // float
+    void SetUniform(int location, float value);
+    void SetUniform(int location, glm::vec2 value);
+    void SetUniform(int location, glm::vec3 value);
+    // integer
+    void SetUniform(int location, int value);
+    void SetUniform(int location, glm::ivec2 value);
+    void SetUniform(int location, glm::ivec3 value);
+    // unsigned int
+    void SetUniform(int location, unsigned int value);
+    void SetUniform(int location, glm::uvec2 value);
+    void SetUniform(int location, glm::uvec3 value);
+    // matrix
+    void SetUniform(int location, glm::mat2x2 value);
+    void SetUniform(int location, glm::mat3x3 value);
+    void SetUniform(int location, glm::mat4x4 value);
 
 private:
     // Build (Attach and link) all shaders provided for the rasterization pipeline
