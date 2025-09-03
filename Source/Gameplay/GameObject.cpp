@@ -8,6 +8,11 @@ GameObject::GameObject(const std::string& name) :
     sprite(new Sprite()) {
 }
 
+GameObject::~GameObject() {
+    delete transform;
+    delete sprite;
+}
+
 GameObject::GameObject(GameObject&& other) {
     name = other.name;
     transform = other.transform;

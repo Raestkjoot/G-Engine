@@ -8,6 +8,7 @@
 class GameObject {
 public:
     GameObject(const std::string& name);
+    ~GameObject();
     GameObject(GameObject&& other);
     // non-copyable
     GameObject(const GameObject&) = delete;
