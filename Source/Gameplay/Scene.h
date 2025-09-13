@@ -13,7 +13,7 @@ public:
     void operator = (const Scene&) = delete;
     
     void Start();
-    void Update();
+    void Update(float delta);
     void End();
 
     void CreateGameObject(const std::string& name = "NewGameObject");

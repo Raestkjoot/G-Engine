@@ -2,12 +2,14 @@
 
 #include "Gameplay/Scene.h"
 #include "Gameplay/GameObject.h"
+#include "Utils/Timer.h"
 
 #include "UI/ImGUIFrame.h"
 #include "UI/SceneUI.h"
 #include "UI/SceneUI_MenuBar.h"
 #include "UI/SceneUI_Hierarchy.h"
 #include "UI/SceneUI_Inspector.h"
+#include "UI/SceneUI_Stats.h"
 
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
@@ -31,7 +33,9 @@ int main() {
     SceneUI_MenuBar menuBar(&scene);
     SceneUI_Hierarchy hierarchy(&scene);
     SceneUI_Inspector inspector(&scene, &hierarchy);
+    SceneUI_Stats stats(&scene);
 
+    Timer updateTimer;
 
     //_____LOOP_____
     while (!window->ShouldClose()) {
@@ -41,6 +45,9 @@ int main() {
         // Draw background
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
+        
+        float delta = updateTimer.Tick();
+        scene.Update(delta);
 
         // UI
         // ImGui::ShowDemoWindow();
@@ -48,8 +55,8 @@ int main() {
         menuBar.Update();
         hierarchy.Update();
         inspector.Update();
-        
-        scene.Update();
+        stats.AddDeltaTimeSample(delta);
+        stats.Update();
 
         // Draw ImGUI
         imGUIFrame.EndFrame();

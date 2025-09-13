@@ -8,7 +8,7 @@ void Scene::Start() {
     // TODO: script->start
 }
 
-void Scene::Update() {
+void Scene::Update(float delta) {
     // TODO: script->update
     // TODO: physics update
     // TODO: script->late update
