@@ -22,7 +22,7 @@ On my machine I get 60 FPS and the CPU usage is about 1%.
 
 ### Capped by Sleep
 I [functionality that would cap the fps and put the thread to sleep](https://github.com/Raestkjoot/G-Engine/blob/2d01c95c1ab0da8af33440d70e448d192031446a/Source/Main.cpp#L54) if it updated faster. It's pretty simple definitely shouldn't be used in an actual product. I could cap it at 60 FPS to get the same results as with V-Sync. 
-This can be pretty useful though, for example if you want to make a casual game that only needs about 30 FPS, it would make a lot of sense to cap it there to avoid using unecessary resources and potentially draining a laptops battery more than necessary.
+This can be pretty useful though, for example if you want to make a casual game that only needs about 30 FPS, it would make a lot of sense to cap it there to avoid using unecessary resources and potentially draining a laptop's battery more than necessary.
 To be production ready it would need a few more things though. If a frame is slower than the cap, it should skip that frame. 
 Another thing to note is that sleep is not very accurate, so we might need to [use OS-specific sleep functions or find a library that implements precise sleep](https://stackoverflow.com/a/41862592).
 
