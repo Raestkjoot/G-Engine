@@ -4,11 +4,26 @@
 
 #include <iostream>
 
-void Scene::Draw() {
+void Scene::Start() {
+    // TODO: script->start
+}
+
+void Scene::Update() {
+    // TODO: script->update
+    // TODO: physics update
+    // TODO: script->late update
+
+    // Render
     for (auto& go : _gameObjects) {
         go.sprite->GetShaderProgram()->SetUniform("position", go.transform->position);
+        go.sprite->GetShaderProgram()->SetUniform("rotation", go.transform->rotation);
+        go.sprite->GetShaderProgram()->SetUniform("scale", go.transform->scale);
         go.sprite->Draw();
     }
+}
+
+void Scene::End() {
+    // TODO: script->end
 }
 
 void Scene::CreateGameObject(const std::string &name) {

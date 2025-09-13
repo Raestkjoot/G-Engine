@@ -11,8 +11,10 @@ public:
     // non-copyable
     Scene(const Scene&) = delete;
     void operator = (const Scene&) = delete;
-
-    void Draw();
+    
+    void Start();
+    void Update();
+    void End();
 
     void CreateGameObject(const std::string& name = "NewGameObject");
 

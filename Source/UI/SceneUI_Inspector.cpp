@@ -16,6 +16,8 @@ void SceneUI_Inspector::Update() {
 
             ImGui::InputText("Name", &gameObject.name);
             ImGui::DragFloat3("Position", &gameObject.transform->position[0], 0.1f);
+            ImGui::DragFloat3("Rotation", &gameObject.transform->rotation[0], 0.1f);
+            ImGui::DragFloat3("Scale", &gameObject.transform->scale[0], 0.1f);
         }
 
         ImGui::End();

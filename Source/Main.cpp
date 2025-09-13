@@ -23,6 +23,8 @@ int main() {
     ImGUIFrame imGUIFrame;
     imGUIFrame.Initialize(*window);
 
+    // TODO: Setup audio
+
     // Setup game
     Scene scene;
     // Setup Engine UI
@@ -33,7 +35,12 @@ int main() {
 
     //_____LOOP_____
     while (!window->ShouldClose()) {
+        // TODO: input
         window->Update();
+
+        // Draw background
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
 
         // UI
         // ImGui::ShowDemoWindow();
@@ -41,12 +48,8 @@ int main() {
         menuBar.Update();
         hierarchy.Update();
         inspector.Update();
-
-        // Draw background
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
         
-        scene.Draw();
+        scene.Update();
 
         // Draw ImGUI
         imGUIFrame.EndFrame();
