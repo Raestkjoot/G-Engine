@@ -10,7 +10,7 @@ With it turned off we can see how the program runs exactly the same as it would 
 
 On my machine I get about 900 FPS and the CPU usage is about 12%.
 
-![Uncapped](Optimizations/LoopPerformance_Uncapped.jpg)
+![Uncapped](LoopPerformance_Uncapped.jpg)
 
 ### Capped by V-Sync
 I'm not sure exactly how GLFW implements V-Sync, but it does seem to involve some form of sleep, since it caps my FPS at 60 and the CPU usage goes down as much as it does when I call sleep.
@@ -18,7 +18,7 @@ I did try to run the program using a busy wait just to be sure and, sure enough,
 
 On my machine I get 60 FPS and the CPU usage is about 1%.
 
-![Capped by V-Sync](Optimizations/LoopPerformance_CappedByVSync.jpg)
+![Capped by V-Sync](LoopPerformance_CappedByVSync.jpg)
 
 ### Capped by Sleep
 I added a function that would cap the fps and put the thread to sleep if it updated faster. It's pretty simple definitely shouldn't be used in an actual product. I could cap it at 60 FPS to get the same results as with V-Sync. 
@@ -28,7 +28,7 @@ Another thing to note is that sleep is not very accurate, so we might need to [u
 
 On my machine I get 30 FPS and the CPU usage is about 0.5%
 
-![Capped by V-Sync](Optimizations/LoopPerformance_CappedBySleep.jpg)
+![Capped by V-Sync](LoopPerformance_CappedBySleep.jpg)
 
 ### Conclusion
 I think for now I will simply go with V-Sync, since that gets the CPU usage down and works well out-of-the-box with GLFW. In the future it might make sense to take another look and try to implement multi-threading and precise sleep.
