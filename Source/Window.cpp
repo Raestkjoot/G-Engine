@@ -32,6 +32,8 @@ Window::Window(int width, int height, const char* title) {
     }
     glfwMakeContextCurrent(_window);
     glfwSetFramebufferSizeCallback(_window, FramebufferResizeCallback);
+    
+    SetVSync(true);
 
     // GLAD: OpenGL Function Loading
     //_____________________________
@@ -51,6 +53,10 @@ void Window::Update() {
 
 void Window::Close() {
 	glfwSetWindowShouldClose(_window, true);
+}
+
+void Window::SetVSync(bool enabled) {
+    glfwSwapInterval( enabled );
 }
 
 void Window::FramebufferResizeCallback(GLFWwindow* window, int width, int height) {

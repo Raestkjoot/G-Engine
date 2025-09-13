@@ -8,7 +8,7 @@ Timer::Timer() {
 
 float Timer::Tick() {
 	std::chrono::time_point<Clock> now = Clock::now();
-	std::chrono::duration<float> delta = now - _lastTick;
+	std::chrono::duration<float> delta = now - _lastTick; // time in seconds
 	_lastTick = now;
 	return delta.count();
 }

@@ -16,7 +16,7 @@ public:
 private:
     void CalculateAverage();
 
-    int _maxSamples = 120;
+    int _maxSamples = 20;
     std::vector<float> _deltaTimeSamples;
     int _sampleIndex = 0;
     float _avgDeltaTime;

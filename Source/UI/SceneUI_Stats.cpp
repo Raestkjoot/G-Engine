@@ -17,8 +17,8 @@ void SceneUI_Stats::AddDeltaTimeSample(float delta) {
 
 void SceneUI_Stats::Update() {
     ImGui::Begin("Stats");
-	ImGui::Text("FPS:    %.0f", 1000.0f / _avgDeltaTime);
-	ImGui::Text("Delta:  %f ms", _avgDeltaTime);
+	ImGui::Text("FPS:    %.0f", 1.0f / _avgDeltaTime);
+	ImGui::Text("Delta:  %.4f sec", _avgDeltaTime);
 	ImGui::End();
 }
 
@@ -27,7 +27,6 @@ void SceneUI_Stats::CalculateAverage() {
     for (int i = 0; i < _maxSamples; ++i) {
         _avgDeltaTime += _deltaTimeSamples[i];
     }
-    // Save the average delta time and convert seconds -> milliseconds
-    _avgDeltaTime /= _maxSamples * 1000.0f;
 
+    _avgDeltaTime /= _maxSamples;
 }

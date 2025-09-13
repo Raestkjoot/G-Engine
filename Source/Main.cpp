@@ -17,6 +17,9 @@
 #include <glad/glad.h>
 
 #include <iostream>
+#include <chrono>
+#include <thread>
+
 
 int main() {
     Window* window = new Window(800, 600, "Hello Window");
@@ -47,6 +50,17 @@ int main() {
         glClear(GL_COLOR_BUFFER_BIT);
         
         float delta = updateTimer.Tick();
+
+        if (false) { // if we want to cap our framerate
+            float targetFrameRate = 30.0f;
+
+            float extraDelta = (1.0f / targetFrameRate) - delta;
+            if (extraDelta > 0) {
+                std::this_thread::sleep_for(std::chrono::milliseconds((int)(extraDelta * 1000.0f)));
+                delta += updateTimer.Tick(); // Because sleep is inaccurate
+            }
+        }
+
         scene.Update(delta);
 
         // UI

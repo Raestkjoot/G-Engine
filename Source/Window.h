@@ -12,6 +12,8 @@ public:
 
 	GLFWwindow* GetInternalWindow() const { return _window; }
 
+	void SetVSync(bool enabled);
+
 private:
 	static void FramebufferResizeCallback(GLFWwindow* window, int width, int height);
 
