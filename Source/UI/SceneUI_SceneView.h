@@ -5,6 +5,8 @@
 #include "SceneUI.h"
 #include "OpenGL/FrameBufferObject.h"
 
+#include <glm/vec2.hpp>
+
 class SceneUI_SceneView : public SceneUI {
 public:
     SceneUI_SceneView(Scene* scene) : SceneUI(scene) {};
@@ -16,4 +18,5 @@ public:
 
 private:
     FrameBufferObject _fbo {400.0f, 400.0f};
+    glm::vec2 _size{400.0f, 400.0f};
 };

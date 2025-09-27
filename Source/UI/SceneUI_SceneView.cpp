@@ -8,11 +8,11 @@
 void SceneUI_SceneView::Update() {
     ImGui::Begin("Scene");
 	
-
-	_fbo.RescaleFrameBuffer(
+	_size = {
 		ImGui::GetContentRegionAvail().x,
 		ImGui::GetContentRegionAvail().y
-	);
+	};
+	_fbo.RescaleFrameBuffer(_size.x, _size.y);
 
 	ImGui::Image(
 		(ImTextureID)_fbo.GetFrameTexture(), 
@@ -26,6 +26,7 @@ void SceneUI_SceneView::Update() {
 
 void SceneUI_SceneView::BindFrameBuffer() {
 	_fbo.Bind();
+	glViewport( 0, 0, _size.x, _size.y);
 }
 
 void SceneUI_SceneView::UnbindFrameBuffer() {
