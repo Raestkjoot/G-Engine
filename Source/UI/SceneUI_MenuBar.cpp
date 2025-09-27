@@ -41,9 +41,9 @@ void SceneUI_MenuBar::SaveScene() {
         NFD_FreePathU8(outPath);
     }
     else if (result == NFD_CANCEL) {
-        puts("User pressed cancel");
+        std::cout << "Cancelled save." << std::endl;
     }
     else {
-        printf("Error: %s\n", NFD_GetError());
+        std::cout << "Error: " << NFD_GetError() << std::endl;
     }
 }
