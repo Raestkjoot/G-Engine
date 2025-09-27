@@ -16,7 +16,7 @@ public:
     void Update(float delta);
     void End();
 
-    void CreateGameObject(const std::string& name = "NewGameObject");
+    GameObject* CreateGameObject(const std::string& name = "NewGameObject");
 
     std::vector<GameObject>& GetAllGameObjects();
 

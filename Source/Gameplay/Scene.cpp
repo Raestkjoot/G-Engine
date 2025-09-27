@@ -26,8 +26,8 @@ void Scene::End() {
     // TODO: script->end
 }
 
-void Scene::CreateGameObject(const std::string &name) {
-    _gameObjects.emplace_back(name);
+GameObject* Scene::CreateGameObject(const std::string &name) {
+    return &_gameObjects.emplace_back(name);
 }
 
 std::vector<GameObject>& Scene::GetAllGameObjects() {

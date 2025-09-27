@@ -1,0 +1,22 @@
+GameObject
+    name GameObject_1
+    Transform
+        position 0.4 0.6 0.1
+        scale 0.3 0.3 1.0
+    Sprite
+GameObject
+    name GameObject_2
+    Transform
+        position -0.4 0.6 0.1
+        scale 0.3 0.3 1.0
+    Sprite
+GameObject
+    name GameObject_3
+    Transform
+        position 0.0 0.2 0.1
+        rotation 0.0 0.0 20.0
+        scale 0.3 0.3 1.0
+    Sprite
+GameObject
+    Transform
+        scale 0.01 2.0 1.0

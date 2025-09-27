@@ -1,6 +1,7 @@
 #include "Window.h"
 
 #include "Gameplay/Scene.h"
+#include "Gameplay/SceneLoader.h"
 #include "Gameplay/GameObject.h"
 #include "Utils/Timer.h"
 
@@ -27,13 +28,13 @@ int main() {
     // TODO: Setup audio
 
     // Setup game
-    Scene scene;
+    Scene* scene = SceneLoader::LoadScene("Assets/MainScene.scene");
     // Setup Engine UI
-    SceneUI_SceneView sceneView(&scene);
-    SceneUI_MenuBar menuBar(&scene);
-    SceneUI_Hierarchy hierarchy(&scene);
-    SceneUI_Inspector inspector(&scene, &hierarchy);
-    SceneUI_Stats stats(&scene);
+    SceneUI_SceneView sceneView(scene);
+    SceneUI_MenuBar menuBar(scene);
+    SceneUI_Hierarchy hierarchy(scene);
+    SceneUI_Inspector inspector(scene, &hierarchy);
+    SceneUI_Stats stats(scene);
 
     Timer updateTimer;
     float delta = updateTimer.Tick();
@@ -63,11 +64,12 @@ int main() {
         glClear(GL_COLOR_BUFFER_BIT);
 
         delta = updateTimer.Tick();
-        scene.Update(delta);
+        scene->Update(delta);
 
         sceneView.UnbindFrameBuffer();
     }
 
     // Cleanup
     imGUIFrame.Cleanup();
+    delete scene;
 }

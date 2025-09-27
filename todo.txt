@@ -9,4 +9,7 @@
 - texture / sprite
 - 3D models
 - lighting
+- game view
+- selecting in scene view + transform gizmos
+- shadows
 - bone animations
