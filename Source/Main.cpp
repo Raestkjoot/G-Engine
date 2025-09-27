@@ -14,6 +14,7 @@
 #include "UI/SceneUI_Stats.h"
 
 #include <glad/glad.h>
+#include <nfd.h>
 
 #include <iostream>
 
@@ -39,6 +40,7 @@ int main() {
     Timer updateTimer;
     float delta = updateTimer.Tick();
 
+    NFD_Init();
 
     //_____LOOP_____
     while (!window->ShouldClose()) {
@@ -71,5 +73,6 @@ int main() {
 
     // Cleanup
     imGUIFrame.Cleanup();
+    NFD_Quit();
     delete scene;
 }

@@ -7,4 +7,7 @@ public:
     SceneUI_MenuBar(Scene* scene) : SceneUI(scene) {}
 
     void Update() override;
+
+private:
+    void SaveScene();
 };

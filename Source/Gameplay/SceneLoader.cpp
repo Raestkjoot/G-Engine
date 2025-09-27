@@ -4,6 +4,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <format>
 
 Scene* SceneLoader::LoadScene(const std::string& filename) {
     Scene* scene = new Scene();
@@ -70,4 +71,32 @@ Scene* SceneLoader::LoadScene(const std::string& filename) {
     }
 
     return scene;
+}
+
+std::string SceneLoader::SerializeScene(Scene* scene) {
+    std::string serializedData;
+    char floatString[30];
+
+    for (auto& go : scene->GetAllGameObjects()) {
+        serializedData += "GameObject\n";
+        serializedData += "\tname " + go.name + "\n";
+        
+        serializedData += "\tTransform\n";
+        serializedData += "\t\tposition " + std::format("{} {} {}\n", 
+            go.transform->position.x,
+            go.transform->position.y,
+            go.transform->position.z);
+        serializedData += "\t\trotation " + std::format("{} {} {}\n", 
+            go.transform->rotation.x,
+            go.transform->rotation.y,
+            go.transform->rotation.z);
+        serializedData += "\t\tscale " + std::format("{} {} {}\n", 
+            go.transform->scale.x,
+            go.transform->scale.y,
+            go.transform->scale.z);
+
+        serializedData += "\tSprite\n";
+    }
+
+    return serializedData;
 }
