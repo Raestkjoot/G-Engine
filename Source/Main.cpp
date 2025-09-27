@@ -12,9 +12,6 @@
 #include "UI/SceneUI_Inspector.h"
 #include "UI/SceneUI_Stats.h"
 
-#include <imgui.h>
-#include <imgui_impl_glfw.h>
-#include <imgui_impl_opengl3.h>
 #include <glad/glad.h>
 
 #include <iostream>
