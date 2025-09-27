@@ -1,3 +1,5 @@
+// https://learnopengl.com/Advanced-OpenGL/Framebuffers
+
 #pragma once
 
 #include "BufferObject.h"

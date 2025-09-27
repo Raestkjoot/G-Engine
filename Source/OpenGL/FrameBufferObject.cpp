@@ -4,7 +4,7 @@
 
 FrameBufferObject::FrameBufferObject(float width, float height) {
     glGenFramebuffers(1, &_handle);
-    glBindBuffer(GL_FRAMEBUFFER, _handle);
+	glBindFramebuffer(GL_FRAMEBUFFER, _handle);
 
     glGenTextures(1, &_texture);
 	glBindTexture(GL_TEXTURE_2D, _texture);
@@ -33,7 +33,7 @@ FrameBufferObject::~FrameBufferObject() {
 }
 
 void FrameBufferObject::Bind() {
-    glBindBuffer(GL_FRAMEBUFFER, _handle);
+	glBindFramebuffer(GL_FRAMEBUFFER, _handle);
 }
 
 void FrameBufferObject::Unbind() {
