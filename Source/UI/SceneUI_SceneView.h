@@ -3,15 +3,17 @@
 #pragma once
 
 #include "SceneUI.h"
-
-class FrameBufferObject;
+#include "OpenGL/FrameBufferObject.h"
 
 class SceneUI_SceneView : public SceneUI {
 public:
-    SceneUI_SceneView(Scene* scene, FrameBufferObject* fbo) : SceneUI(scene), _fbo(fbo) {}
+    SceneUI_SceneView(Scene* scene) : SceneUI(scene) {};
 
     void Update() override;
 
+    void BindFrameBuffer();
+    void UnbindFrameBuffer();
+
 private:
-    FrameBufferObject* _fbo;
+    FrameBufferObject _fbo {400.0f, 400.0f};
 };

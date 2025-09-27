@@ -4,7 +4,6 @@
 #include "Gameplay/GameObject.h"
 #include "Utils/Timer.h"
 
-#include "OpenGL/FrameBufferObject.h"
 #include "UI/ImGUIFrame.h"
 #include "UI/SceneUI.h"
 #include "UI/SceneUI_SceneView.h"
@@ -32,9 +31,8 @@ int main() {
 
     // Setup game
     Scene scene;
-    FrameBufferObject sceneBuffer(400.0f, 400.0f);
     // Setup Engine UI
-    SceneUI_SceneView sceneView(&scene, &sceneBuffer);
+    SceneUI_SceneView sceneView(&scene);
     SceneUI_MenuBar menuBar(&scene);
     SceneUI_Hierarchy hierarchy(&scene);
     SceneUI_Inspector inspector(&scene, &hierarchy);
@@ -63,14 +61,14 @@ int main() {
         imGUIFrame.EndFrame();
 
         // Game Scene
-        sceneBuffer.Bind();
+        sceneView.BindFrameBuffer();
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
         delta = updateTimer.Tick();
         scene.Update(delta);
 
-        sceneBuffer.Unbind();
+        sceneView.UnbindFrameBuffer();
     }
 
     // Cleanup
