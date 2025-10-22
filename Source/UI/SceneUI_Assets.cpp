@@ -2,6 +2,8 @@
 
 #include "Gameplay/Scene.h"
 #include "Gameplay/GameObject.h"
+#include "Utils/ServiceLocator.h"
+#include "Utils/Application.h"
 
 #include <imgui.h>
 #include <vector>
