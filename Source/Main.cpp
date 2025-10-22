@@ -12,6 +12,7 @@
 #include "UI/SceneUI_Hierarchy.h"
 #include "UI/SceneUI_Inspector.h"
 #include "UI/SceneUI_Stats.h"
+#include "UI/SceneUI_Assets.h"
 
 #include <glad/glad.h>
 #include <nfd.h>
@@ -35,6 +36,7 @@ int main() {
     SceneUI_MenuBar menuBar(scene);
     SceneUI_Hierarchy hierarchy(scene);
     SceneUI_Inspector inspector(scene, &hierarchy);
+    SceneUI_Assets assets(scene);
     SceneUI_Stats stats(scene);
 
     Timer updateTimer;
@@ -56,6 +58,7 @@ int main() {
         menuBar.Update();
         hierarchy.Update();
         inspector.Update();
+        assets.Update();
         stats.AddDeltaTimeSample(delta);
         stats.Update();
         imGUIFrame.EndFrame();
