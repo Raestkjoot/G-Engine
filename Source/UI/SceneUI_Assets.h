@@ -1,15 +1,11 @@
 # pragma once
 
-#include "SceneUI.h"
-
 #include <set>
 #include <filesystem>
 
-class SceneUI_Assets : public SceneUI {
+class SceneUI_Assets {
 public:
-    SceneUI_Assets(Scene* scene) : SceneUI(scene) {}
-
-    void Update() override;
+    void Update();
 
     void RefreshAssets();
 

@@ -1,13 +1,11 @@
 # pragma once
 
-#include "SceneUI.h"
+class Scene;
 
-class SceneUI_MenuBar : public SceneUI {
+class SceneUI_MenuBar {
 public:
-    SceneUI_MenuBar(Scene* scene) : SceneUI(scene) {}
-
-    void Update() override;
+    void Update(Scene* scene);
 
 private:
-    void SaveScene();
+    void SaveScene(Scene* scene);
 };

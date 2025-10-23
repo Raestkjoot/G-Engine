@@ -2,16 +2,13 @@
 
 #pragma once
 
-#include "SceneUI.h"
 #include "OpenGL/FrameBufferObject.h"
 
 #include <glm/vec2.hpp>
 
-class SceneUI_SceneView : public SceneUI {
+class SceneUI_SceneView {
 public:
-    SceneUI_SceneView(Scene* scene) : SceneUI(scene) {};
-
-    void Update() override;
+    void Update();
 
     void BindFrameBuffer();
     void UnbindFrameBuffer();

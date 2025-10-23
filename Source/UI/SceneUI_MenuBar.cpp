@@ -9,24 +9,24 @@
 #include <iostream>
 #include <fstream>
 
-void SceneUI_MenuBar::Update() {
+void SceneUI_MenuBar::Update(Scene* scene) {
     ImGui::BeginMainMenuBar();
     if (ImGui::BeginMenu("File")) {
         if (ImGui::MenuItem("Save scene as...")) {
-            SaveScene();
+            SaveScene(scene);
         }
         ImGui::EndMenu();
     }
     if (ImGui::BeginMenu("GameObject")) {
         if (ImGui::MenuItem("Create New GameObject")) {
-            _scene->CreateGameObject();
+            scene->CreateGameObject();
         }
         ImGui::EndMenu();
     }
     ImGui::EndMainMenuBar();
 }
 
-void SceneUI_MenuBar::SaveScene() {
+void SceneUI_MenuBar::SaveScene(Scene* scene) {
     nfdu8char_t* outPath;
     nfdu8filteritem_t filters[1] = {{"Scene file", "scene"}};
     nfdsavedialogu8args_t args = {0};
@@ -36,7 +36,7 @@ void SceneUI_MenuBar::SaveScene() {
     nfdresult_t result = NFD_SaveDialogN_With(&outPath, &args);
     if (result == NFD_OKAY) {
         std::ofstream outFile(outPath);
-        outFile << SceneLoader::SerializeScene(_scene);
+        outFile << SceneLoader::SerializeScene(scene);
         outFile.close();
         NFD_FreePathU8(outPath);
     }

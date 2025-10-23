@@ -5,6 +5,7 @@
 #include <fstream>
 #include <iostream>
 #include <format>
+#include <charconv>
 
 Scene* SceneLoader::LoadScene(const std::string& filename) {
     Scene* scene = new Scene();
@@ -35,7 +36,7 @@ Scene* SceneLoader::LoadScene(const std::string& filename) {
                     for (int i = 0; i < 3; ++i) {
                         str.clear();
                         sceneFile >> str;
-                        go->transform->position[i] = stof(str);
+                        go->transform->position[i] = StrToFloat(str);
                     }
                     str.clear();
                     sceneFile >> str;
@@ -44,7 +45,7 @@ Scene* SceneLoader::LoadScene(const std::string& filename) {
                     for (int i = 0; i < 3; ++i) {
                         str.clear();
                         sceneFile >> str;
-                        go->transform->rotation[i] = stof(str);
+                        go->transform->rotation[i] = StrToFloat(str);
                     }
                     str.clear();
                     sceneFile >> str;
@@ -53,7 +54,7 @@ Scene* SceneLoader::LoadScene(const std::string& filename) {
                     for (int i = 0; i < 3; ++i) {
                         str.clear();
                         sceneFile >> str;
-                        go->transform->scale[i] = stof(str);
+                        go->transform->scale[i] = StrToFloat(str);
                     }
                     str.clear();
                     sceneFile >> str;
@@ -64,7 +65,7 @@ Scene* SceneLoader::LoadScene(const std::string& filename) {
             }
         }
         if (str == "Sprite") {
-            std::cout << str << std::endl;
+            // TODO: Add sprite component
         }
 
         str.clear();
@@ -99,4 +100,13 @@ std::string SceneLoader::SerializeScene(Scene* scene) {
     }
 
     return serializedData;
+}
+
+float SceneLoader::StrToFloat(const std::string& str) {
+    // We use std::from_chars because it is locale-independent and uses the default ("C") locale, meaning '.' is used for the decimal point.
+    // Other formatting functions, such as atof, can expect ',' for the decimal point.
+    // std::from_chars should also be the fastest possible implementation, since it ignores most formatting policies.
+    float val;
+    std::from_chars(str.data(), str.data() + str.size(), val);
+    return val;
 }

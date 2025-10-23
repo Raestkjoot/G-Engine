@@ -10,6 +10,7 @@ public:
     Application();
 
     void Run();
+    void LoadScene(const std::string& scenePath);
     void Quit();
 
 private:

@@ -1,17 +1,15 @@
 #pragma once
 
-#include "SceneUI.h"
-
 #include <vector>
 
 class SceneUI_Stats;
 
-class SceneUI_Stats : public SceneUI {
+class SceneUI_Stats {
 public:
-    SceneUI_Stats(Scene* scene);
+    SceneUI_Stats();
 
     void AddDeltaTimeSample(float delta);
-    void Update() override;
+    void Update();
 
 private:
     void CalculateAverage();

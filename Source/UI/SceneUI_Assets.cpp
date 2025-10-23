@@ -22,7 +22,11 @@ void SceneUI_Assets::Update() {
         }
 
         if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(0)) {
-            std::cout << "open " << asset.extension() << std::endl;
+            if (asset.extension() == ".scene") {
+                ServiceLocator::GetApplication()->LoadScene(
+                    std::filesystem::current_path() / "Assets" / asset
+                );
+            }
         }
 
         ImGui::PopID();

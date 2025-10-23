@@ -7,7 +7,6 @@
 #include "Window.h"
 
 #include "UI/ImGUIFrame.h"
-#include "UI/SceneUI.h"
 #include "UI/SceneUI_SceneView.h"
 #include "UI/SceneUI_MenuBar.h"
 #include "UI/SceneUI_Hierarchy.h"
@@ -33,14 +32,14 @@ void Application::Run() {
     // TODO: Setup audio
 
     // Setup game
-    Scene* scene = SceneLoader::LoadScene("Assets/MainScene.scene");
+    LoadScene("Assets/MainScene.scene");
     // Setup Engine UI
-    SceneUI_SceneView sceneView(scene);
-    SceneUI_MenuBar menuBar(scene);
-    SceneUI_Hierarchy hierarchy(scene);
-    SceneUI_Inspector inspector(scene, &hierarchy);
-    SceneUI_Assets assets(scene);
-    SceneUI_Stats stats(scene);
+    SceneUI_SceneView sceneView;
+    SceneUI_MenuBar menuBar;
+    SceneUI_Hierarchy hierarchy;
+    SceneUI_Inspector inspector(&hierarchy);
+    SceneUI_Assets assets;
+    SceneUI_Stats stats;
 
     Timer updateTimer;
     float delta = updateTimer.Tick();
@@ -56,11 +55,11 @@ void Application::Run() {
         // UI
         imGUIFrame.BeginFrame();
         // ImGui::ShowDemoWindow();
-        sceneView.Update();
-        menuBar.Update();
-        hierarchy.Update();
-        inspector.Update();
         assets.Update();
+        sceneView.Update();
+        menuBar.Update(_curScene);
+        hierarchy.Update(_curScene);
+        inspector.Update(_curScene);
         stats.AddDeltaTimeSample(delta);
         stats.Update();
         imGUIFrame.EndFrame();
@@ -71,10 +70,18 @@ void Application::Run() {
         glClear(GL_COLOR_BUFFER_BIT);
 
         delta = updateTimer.Tick();
-        scene->Update(delta);
+        _curScene->Update(delta);
 
         sceneView.UnbindFrameBuffer();
     }
+
+    imGUIFrame.Cleanup();
+    NFD_Quit();
+}
+
+void Application::LoadScene(const std::string& scenePath) {
+    delete _curScene;
+    _curScene = SceneLoader::LoadScene(scenePath);
 }
 
 void Application::Quit() {

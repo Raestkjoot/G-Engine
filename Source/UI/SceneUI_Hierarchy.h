@@ -1,14 +1,13 @@
 # pragma once
 
-#include "SceneUI.h"
+class Scene;
 
-class SceneUI_Hierarchy : public SceneUI {
+class SceneUI_Hierarchy {
 public:
-    SceneUI_Hierarchy(Scene* scene) : SceneUI(scene) {}
-
-    void Update() override;
+    void Update(Scene* scene);
 
     int GetCurSelected() const;
+    void Unselect();
 
 private:
     int _selected = -1;

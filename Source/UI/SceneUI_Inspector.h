@@ -1,14 +1,13 @@
 #pragma once
 
-#include "SceneUI.h"
-
+class Scene;
 class SceneUI_Hierarchy;
 
-class SceneUI_Inspector : public SceneUI {
+class SceneUI_Inspector {
 public:
-    SceneUI_Inspector(Scene* scene, SceneUI_Hierarchy* hierarchy) : SceneUI(scene), _hierarchy(hierarchy) {}
+    SceneUI_Inspector(SceneUI_Hierarchy* hierarchy) : _hierarchy(hierarchy) {}
 
-    void Update() override;
+    void Update(Scene* scene);
 
 private:
     SceneUI_Hierarchy* _hierarchy;

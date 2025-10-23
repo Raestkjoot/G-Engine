@@ -2,7 +2,7 @@
 
 #include <imgui.h>
 
-SceneUI_Stats::SceneUI_Stats(Scene* scene) : SceneUI(scene) {
+SceneUI_Stats::SceneUI_Stats() {
     _deltaTimeSamples.resize(_maxSamples);
 }
 
