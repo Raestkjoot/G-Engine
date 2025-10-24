@@ -1,7 +1,7 @@
 # TODO
 
 [x] Scene file: A file that stores scene information (gameobjects, their components and component values).
-[] Asset manager: A way to manage assets (such as scene files)
+[x] Asset manager: A way to manage assets (such as scene files)
 [] Build game: A way to build the game, resulting in an executable that doesn't have all the engine features, only the gameplay stuff.
 [] Script component: An Angel script or Luau scripting component that lets us add game logic to gameObjects.
 [] Better Transforms: We can make a test scene with 1000s of static/moving gameObjects and benchmark. Current -> (maybe look at Freya's Rotation) -> Transform matrix -> cache or something

@@ -5,6 +5,7 @@
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
+#include <filesystem>
 
 ImGUIFrame::ImGUIFrame() {
     IMGUI_CHECKVERSION();
@@ -15,6 +16,7 @@ ImGUIFrame::ImGUIFrame() {
     ImGuiIO& io = ImGui::GetIO();
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
     io.ConfigDragClickToInputText = true; // Makes it so we can single-click on drag floats to enter input mode
+    io.IniFilename = (std::filesystem::current_path() / "imgui.ini").c_str();
     // io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
     // io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
 }

@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <filesystem>
 
 void SceneUI_MenuBar::Update(Scene* scene) {
     ImGui::BeginMainMenuBar();
@@ -33,6 +34,7 @@ void SceneUI_MenuBar::SaveScene(Scene* scene) {
     args.filterList = filters;
     args.filterCount = 1;
     args.defaultName = "NewScene.scene";
+    args.defaultPath = (std::filesystem::current_path() / "Assets").c_str();
     nfdresult_t result = NFD_SaveDialogN_With(&outPath, &args);
     if (result == NFD_OKAY) {
         std::ofstream outFile(outPath);

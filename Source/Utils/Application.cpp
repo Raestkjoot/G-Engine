@@ -16,8 +16,10 @@
 
 #include <glad/glad.h>
 #include <nfd.h>
+#include <imgui.h>
 
 #include <iostream>
+#include <filesystem>
 
 Application::Application() :
     _window(new Window(800, 600, "Hello Window")) {
@@ -32,7 +34,9 @@ void Application::Run() {
     // TODO: Setup audio
 
     // Setup game
-    LoadScene("Assets/MainScene.scene");
+    std::filesystem::path assetsPath = std::filesystem::current_path() / "Assets";
+    std::filesystem::current_path(assetsPath);
+    LoadScene("MainScene.scene");
     // Setup Engine UI
     SceneUI_SceneView sceneView;
     SceneUI_MenuBar menuBar;
@@ -54,7 +58,7 @@ void Application::Run() {
 
         // UI
         imGUIFrame.BeginFrame();
-        // ImGui::ShowDemoWindow();
+        //ImGui::ShowDemoWindow();
         assets.Update();
         sceneView.Update();
         menuBar.Update(_curScene);

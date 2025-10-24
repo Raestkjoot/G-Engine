@@ -4,8 +4,8 @@
 
 Sprite::Sprite() {
     // Shader
-    Shader vertShader = Shader::Load(Shader::Type::VertexShader, "Assets/Default.vert");
-    Shader fragShader = Shader::Load(Shader::Type::FragmentShader, "Assets/Default.frag");
+    Shader vertShader = Shader::Load(Shader::Type::VertexShader, "Default.vert");
+    Shader fragShader = Shader::Load(Shader::Type::FragmentShader, "Default.frag");
     _shaderProgram.Build(vertShader, fragShader);
 
     // Vertices
