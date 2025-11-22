@@ -31,7 +31,8 @@ void EngineApplication::Run() {
     // TODO: Setup audio
 
     // Setup game
-    std::filesystem::path assetsPath = std::filesystem::current_path() / "Assets";
+    _projectPath = std::filesystem::current_path();
+    std::filesystem::path assetsPath = _projectPath / "Assets";
     std::filesystem::current_path(assetsPath);
     LoadScene("MainScene.scene");
     // Setup Engine UI
@@ -78,4 +79,8 @@ void EngineApplication::Run() {
 
     imGUIFrame.Cleanup();
     NFD_Quit();
+}
+
+std::string EngineApplication::GetProjectPath() {
+    return _projectPath;
 }

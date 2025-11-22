@@ -2,6 +2,7 @@
 
 #include "Gameplay/Scene.h"
 #include "Gameplay/SceneLoader.h"
+#include "Utils/GameBuilder.h"
 
 #include <imgui.h>
 #include <nfd.h>
@@ -15,6 +16,10 @@ void SceneUI_MenuBar::Update(Scene* scene) {
     if (ImGui::BeginMenu("File")) {
         if (ImGui::MenuItem("Save scene as...")) {
             SaveScene(scene);
+        }
+        if (ImGui::MenuItem("Build Project")) {
+            std::cout << "Build" << std::endl;
+            GameBuilder::BuildGame();
         }
         ImGui::EndMenu();
     }
