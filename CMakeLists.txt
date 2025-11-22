@@ -5,6 +5,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project(Hello)
 
+# TODO: We probably want to use a flag instead so we can build both game/engine in either debug/release mode
+#       Default should be debug-engine
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     add_compile_definitions(ENGINE_BUILD)
 else()

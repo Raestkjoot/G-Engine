@@ -9,11 +9,11 @@ class Application {
 public:
     Application();
 
-    void Run();
+    virtual void Run();
     void LoadScene(const std::string& scenePath);
     void Quit();
 
-private:
+protected:
     bool IsRunning();
 
     Window* _window = nullptr;
