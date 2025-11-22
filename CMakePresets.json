@@ -1,0 +1,36 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 21,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "game",
+      "binaryDir": "${sourceDir}/GameBuild",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "engine",
+      "binaryDir": "${sourceDir}/EngineBuild",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "engine",
+      "displayName": "engine",
+      "configurePreset": "engine"
+    },
+    {
+      "name": "game",
+      "displayName": "game",
+      "configurePreset": "game"
+    }
+  ]
+}

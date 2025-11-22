@@ -5,6 +5,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project(Hello)
 
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    add_compile_definitions(ENGINE_BUILD)
+else()
+    add_compile_definitions(GAME_BUILD)
+endif()
+
 file(GLOB_RECURSE Source "Source/*.cpp" "Source/*.h")
 add_subdirectory(Dependencies)
 

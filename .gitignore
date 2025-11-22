@@ -1,9 +1,12 @@
 [oO]ut
 [bB]in/
 [bB]uild/
+GameBuild/
+EngineBuild/
 .vs/
 .vscode/
 .idea/
+.cache
 
 CMakeLists.txt.user
 CMakeCache.txt

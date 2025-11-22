@@ -16,6 +16,8 @@ ImGUIFrame::ImGUIFrame() {
     ImGuiIO& io = ImGui::GetIO();
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
     io.ConfigDragClickToInputText = true; // Makes it so we can single-click on drag floats to enter input mode
+    // TODO: Create a default imgui.ini - then we need to differentiate between engineDir where the imgui.ini 
+    // will be, and the projectDir where the assets for different projects will be
     io.IniFilename = (std::filesystem::current_path() / "imgui.ini").c_str();
     // io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
     // io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
